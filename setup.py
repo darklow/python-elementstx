@@ -3,16 +3,19 @@
 from setuptools import setup, find_packages
 import os
 
-from elementstx import __version__
-
 here = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(here, 'README.md')) as f:
     README = f.read()
 
 requires = ['python-bitcointx>=1.0.0,<2']
 
+version_ns = {}
+ver_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'elementstx', 'version.py')
+with open(ver_path) as ver_file:
+    exec(ver_file.read(), version_ns)
+
 setup(name='python-elementstx',
-      version=__version__,
+      version=version_ns['__version__'],
       description='Elements module for python-bitcointx',
       long_description=README,
       long_description_content_type='text/markdown',
