@@ -13,15 +13,18 @@
 # pylama:ignore=E501
 
 import ctypes
+import os
 from typing import List
 
+from bitcointx import get_custom_secp256k1_path
 from bitcointx.core.secp256k1 import (
     load_secp256k1_library,
     SECP256K1_CONTEXT_SIGN, SECP256K1_CONTEXT_VERIFY,
     secp256k1_create_and_init_context
 )
 
-_secp256k1 = load_secp256k1_library()
+_secp256k1 = load_secp256k1_library(os.environ.get('ELEMENTSTX_LIBSECP256K1_PATH',
+                                                   get_custom_secp256k1_path()))
 
 
 def _set_zkp_func_types() -> None:
